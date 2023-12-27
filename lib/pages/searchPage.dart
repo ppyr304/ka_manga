@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ka_manga/pages/detailsPage.dart';
+import 'package:ka_manga/pages/detailsPage/upperDetailsPage.dart';
 
 import '../entities/mangaData.dart';
 import '../services/search.dart';
@@ -64,7 +64,7 @@ class _SearchPageState extends State<SearchPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => DetailsPage(
+                                builder: (context) => UpperDetailsPage(
                                   data: results[index],
                                 ),
                               ),
