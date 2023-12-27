@@ -1,7 +1,5 @@
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
-import 'package:ka_manga/entities/mangaData.dart';
 import 'package:mangadex_library/mangadex_library.dart';
 
 class MangadexLib {
@@ -67,35 +65,5 @@ class MangadexLib {
     client.dispose();
 
     return images;
-  }
-
-  static Future<List<MangaData>> searchManga(String query) async {
-    List<MangaData> results = [];
-
-    var client = MangadexClient(
-      refreshDuration: const Duration(minutes: 1),
-      onRefresh: () {
-        log('Token refreshed!');
-      },
-    );
-
-    try {
-      Search searchData = await client.search(query: query);
-
-      debugPrint('num = ${searchData.total.toString()}');
-
-      for (var data in searchData.data!) {
-        results.add(MangaData(mangaData: data.attributes!));
-      }
-
-    } on MangadexServerException catch (error) {
-      for (var error in error.info.errors!) {
-        log(error.title!);
-        log(error.detail!);
-      }
-    }
-    client.dispose();
-
-    return results;
   }
 }

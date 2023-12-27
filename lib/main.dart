@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ka_manga/services/MangadexLib.dart';
 import 'package:ka_manga/pages/searchPage.dart';
 
+import 'entities/constant.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -14,11 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Ka Manga',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: CustomTheme(),
       home: const MyHomePage(title: 'Ka Manga'),
+      // home: const DetailsPage(),
     );
   }
 }

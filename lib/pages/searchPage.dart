@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ka_manga/services/MangadexLib.dart';
+import 'package:ka_manga/pages/detailsPage.dart';
 
 import '../entities/mangaData.dart';
+import '../services/search.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -19,7 +20,7 @@ class _SearchPageState extends State<SearchPage> {
   List<MangaData> results = [];
 
   void getSearch() async {
-    results = await MangadexLib.searchManga(query);
+    results = await searchManga(query);
     setState(() {
       state = Future.value('done');
     });
@@ -29,6 +30,7 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text('search'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: Column(
@@ -58,6 +60,16 @@ class _SearchPageState extends State<SearchPage> {
                         return ListTile(
                           title:
                               Text(results[index].mangaData!.title!.en ?? ''),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailsPage(
+                                  data: results[index],
+                                ),
+                              ),
+                            );
+                          },
                         );
                       });
                 } else if (snapshot.connectionState ==
